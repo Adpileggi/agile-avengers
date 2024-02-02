@@ -105,7 +105,7 @@ function recipeNorthEast() {
                     // recipeName.classList = 'add any classes that we want'
                                 
                     var portionsCalories = document.createElement('p')
-                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + Math.floor(data.hits[i].recipe.calories));
                     
                     var allergy = document.createElement('p')                                       
                     allergy.textContent = ('This recipe is: ');
@@ -168,7 +168,7 @@ function recipeMidWest() {
                     // recipeName.classList = 'add any classes that we want'
                                 
                     var portionsCalories = document.createElement('p')
-                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + Math.floor(data.hits[i].recipe.calories));
                     
                     var allergy = document.createElement('p')                                       
                     allergy.textContent = ('This recipe is: ');
@@ -229,7 +229,7 @@ function recipeSouth() {
                         // recipeName.classList = 'add any classes that we want'
                                     
                         var portionsCalories = document.createElement('p')
-                        portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                        portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + Math.floor(data.hits[i].recipe.calories));
                         
                         var allergy = document.createElement('p')                                       
                         allergy.textContent = ('This recipe is: ');
@@ -291,7 +291,7 @@ function recipeWest() {
                     // recipeName.classList = 'add any classes that we want'
                                 
                     var portionsCalories = document.createElement('p')
-                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + Math.floor(data.hits[i].recipe.calories));
                     
                     var allergy = document.createElement('p')                                       
                     allergy.textContent = ('This recipe is: ');
