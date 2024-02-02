@@ -79,44 +79,58 @@ function recipeNorthEast() {
         
         .then(function (data) {
             console.log(data);
-        
-            for (var i = 0; i < data.hits.length; i++) {
-            console.log(data.hits[i].recipe.label)
+                    
             
             var origin = document.createElement('h3')
             origin.textContent = 'These recipes are typical of the North Eastern United States'
+
+            recipeH.appendChild(origin)  
             
-            var recipeName = document.createElement('p')
-            recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
-            // use line below to add classes
-            // recipeName.classList = 'add any classes that we want'
+                for (var i = 0; i < data.hits.length; i++) {
+                console.log(data.hits[i].recipe.label)             
+                
+                var recipeName = document.createElement('p')
+                recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
+                // use line below to add classes
+                // recipeName.classList = 'add any classes that we want'
+                            
+                var portionsCalories = document.createElement('p')
+                portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+
+                    for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
+                    
+                    var allergy = document.createElement('p')                                       
+                        allergy.textContent = ('This recipe is: ');
+                    
+                    var allergyList = data.hits[i].recipe.healthLabels[j]
                         
-            var portionsCalories = document.createElement('p')
-            portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                        console.log(allergyList)
 
-            for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
-            var allergyInfo = document.createElement('p')
-                console.log(data.hits[i].recipe.healthLabels[j])
-            allergyInfo.textContent = ('This recipe is: ' + data.hits[i].recipe.healthLabels[j])
-            };
+                    var span = document.createElement('span')
+                        span.textContent = (allergyList + ' ');
 
-            var source = document.createElement('p')
-            source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
+                        allergy.append(span)
+                    };
 
-            var recipeUrl = document.createElement('a')
-            recipeUrl.setAttribute('href', data.hits[i].recipe.url)
+                var source = document.createElement('p')
+                source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
 
-            var urlText = document.createElement('p')
-            urlText.textContent = 'Check out the recipe here!'
+                var recipeUrl = document.createElement('a')
+                recipeUrl.setAttribute('href', data.hits[i].recipe.url)
 
-            recipeUrl.appendChild(urlText)
-            
-            recipeEl.append(recipeName, portionsCalories, allergyInfo, source, recipeUrl)
-            
-            recipeH.appendChild(origin)
+                var urlText = document.createElement('p')
+                urlText.textContent = 'Check out the recipe here!'
 
-            }
-        })
+                
+
+                recipeUrl.appendChild(urlText)
+                
+                recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
+
+                }
+
+
+            })
 };
         
 
