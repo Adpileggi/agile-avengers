@@ -97,12 +97,12 @@ function recipeNorthEast() {
                 var portionsCalories = document.createElement('p')
                 portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
 
-                    for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
-                    
-                    var allergy = document.createElement('p')                                       
-                        allergy.textContent = ('This recipe is: ');
-                    
-                    var allergyList = data.hits[i].recipe.healthLabels[j]
+                
+                var allergy = document.createElement('p')                                       
+                allergy.textContent = ('This recipe is: ');
+                
+                for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
+                        var allergyList = data.hits[i].recipe.healthLabels[j]
                         
                         console.log(allergyList)
 
@@ -119,9 +119,7 @@ function recipeNorthEast() {
                 recipeUrl.setAttribute('href', data.hits[i].recipe.url)
 
                 var urlText = document.createElement('p')
-                urlText.textContent = 'Check out the recipe here!'
-
-                
+                urlText.textContent = 'Check out the recipe here!'              
 
                 recipeUrl.appendChild(urlText)
                 
@@ -133,7 +131,6 @@ function recipeNorthEast() {
             })
 };
         
-
             // for (var j = 0; j < data.hits[i].recipe.healthLabels; j++) {
             // console.log(data.hits[i].recipe.healthLabels[j]);
             // // ingredients.textContent = data.hits[i].recipe.ingredients.text
