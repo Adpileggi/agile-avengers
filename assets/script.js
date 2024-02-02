@@ -54,8 +54,17 @@ async function initMap() {
         });
 
         marker.addListener("click", function (event) {
-
             console.log(this.title)
+
+                if (this.title === '1. North East') {
+                   recipeNorthEast() 
+                } else if (this.title === '2. Mid West') {
+                    recipeMidWest()    
+                } else if (this.title === '3. South') {
+                    recipeSouth()
+                } else {
+                    recipeWest()
+                }
 
         });
     });
@@ -68,7 +77,7 @@ initMap();
 // have the recipe api search for state recipe when click event happens on the map?
 
 // populate search results to the recipe div
-recipeNorthEast()
+
 function recipeNorthEast() {
     var apiUrl = 'https://api.edamam.com/api/recipes/v2?type=public&q=New%20England&app_id=3ee8fae0&app_key=88364411228c6da4b3e3a5deb40e8840&cuisineType=American&imageSize=REGULAR'
 
@@ -76,68 +85,61 @@ function recipeNorthEast() {
         .then(function (response) {
             return response.json();
         })
-        
         .then(function (data) {
             console.log(data);
-                    
-            
+// clears inner HTML
+            recipeH.innerHTML = '';
+            recipeEl.innerHTML = '';
+            // title of appended section
             var origin = document.createElement('h3')
             origin.textContent = 'These recipes are typical of the North Eastern United States'
 
             recipeH.appendChild(origin)  
-            
+            // loop fetch data
                 for (var i = 0; i < data.hits.length; i++) {
-                console.log(data.hits[i].recipe.label)             
-                
-                var recipeName = document.createElement('p')
-                recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
-                // use line below to add classes
-                // recipeName.classList = 'add any classes that we want'
+                    console.log(data.hits[i].recipe.label)             
+                    // create and append elements
+                    var recipeName = document.createElement('p')
+                    recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
+                    // use line below to add classes
+                    // recipeName.classList = 'add any classes that we want'
+                                
+                    var portionsCalories = document.createElement('p')
+                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                    
+                    var allergy = document.createElement('p')                                       
+                    allergy.textContent = ('This recipe is: ');
+                    
+                    for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
+                            var allergyList = data.hits[i].recipe.healthLabels[j]
                             
-                var portionsCalories = document.createElement('p')
-                portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                            console.log(allergyList)
 
-                
-                var allergy = document.createElement('p')                                       
-                allergy.textContent = ('This recipe is: ');
-                
-                for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
-                        var allergyList = data.hits[i].recipe.healthLabels[j]
-                        
-                        console.log(allergyList)
+                        var span = document.createElement('span')
+                            span.textContent = (allergyList + ' ');
 
-                    var span = document.createElement('span')
-                        span.textContent = (allergyList + ' ');
+                            allergy.append(span)
+                        };
 
-                        allergy.append(span)
-                    };
+                    var source = document.createElement('p')
+                    source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
 
-                var source = document.createElement('p')
-                source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
+                    var recipeUrl = document.createElement('a')
+                    recipeUrl.setAttribute('href', data.hits[i].recipe.url)
 
-                var recipeUrl = document.createElement('a')
-                recipeUrl.setAttribute('href', data.hits[i].recipe.url)
+                    var urlText = document.createElement('p')
+                    urlText.textContent = 'Check out the recipe here!'              
 
-                var urlText = document.createElement('p')
-                urlText.textContent = 'Check out the recipe here!'              
-
-                recipeUrl.appendChild(urlText)
-                
-                recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
+                    recipeUrl.appendChild(urlText)
+                    
+                    recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
 
                 }
 
 
-            })
+        })
 };
         
-            // for (var j = 0; j < data.hits[i].recipe.healthLabels; j++) {
-            // console.log(data.hits[i].recipe.healthLabels[j]);
-            // // ingredients.textContent = data.hits[i].recipe.ingredients.text
-            // }            
-        
-
-recipeMidWest()
 function recipeMidWest() {
     var apiUrl = 'https://api.edamam.com/api/recipes/v2?type=public&q=Mid%20West&app_id=3ee8fae0&app_key=88364411228c6da4b3e3a5deb40e8840&cuisineType=American&imageSize=REGULAR'
 
@@ -148,10 +150,57 @@ function recipeMidWest() {
         
         .then(function (data) {
             console.log(data);
+
+            recipeH.innerHTML = '';
+            recipeEl.innerHTML = '';
+        
+            var origin = document.createElement('h3')
+            origin.textContent = 'These recipes are typical of the Mid West United States'
+
+            recipeH.appendChild(origin)  
+            
+                for (var i = 0; i < data.hits.length; i++) {
+                    console.log(data.hits[i].recipe.label)             
+                    
+                    var recipeName = document.createElement('p')
+                    recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
+                    // use line below to add classes
+                    // recipeName.classList = 'add any classes that we want'
+                                
+                    var portionsCalories = document.createElement('p')
+                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                    
+                    var allergy = document.createElement('p')                                       
+                    allergy.textContent = ('This recipe is: ');
+                    
+                    for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
+                            var allergyList = data.hits[i].recipe.healthLabels[j]
+                            
+                            console.log(allergyList)
+
+                        var span = document.createElement('span')
+                            span.textContent = (allergyList + ' ');
+
+                            allergy.append(span)
+                        };
+
+                    var source = document.createElement('p')
+                    source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
+
+                    var recipeUrl = document.createElement('a')
+                    recipeUrl.setAttribute('href', data.hits[i].recipe.url)
+
+                    var urlText = document.createElement('p')
+                    urlText.textContent = 'Check out the recipe here!'              
+
+                    recipeUrl.appendChild(urlText)
+                    
+                    recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
+
+                }
         })
 };
-
-recipeSouth()
+  
 function recipeSouth() {
     var apiUrl = 'https://api.edamam.com/api/recipes/v2?type=public&q=Southern&app_id=3ee8fae0&app_key=88364411228c6da4b3e3a5deb40e8840&cuisineType=American&imageSize=REGULAR'
 
@@ -162,10 +211,58 @@ function recipeSouth() {
         
         .then(function (data) {
             console.log(data);
+
+            recipeH.innerHTML = '';
+            recipeEl.innerHTML = '';
+
+                var origin = document.createElement('h3')
+                origin.textContent = 'These recipes are typical of the Southern United States'
+
+                recipeH.appendChild(origin)  
+                
+                    for (var i = 0; i < data.hits.length; i++) {
+                        console.log(data.hits[i].recipe.label)             
+                        
+                        var recipeName = document.createElement('p')
+                        recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
+                        // use line below to add classes
+                        // recipeName.classList = 'add any classes that we want'
+                                    
+                        var portionsCalories = document.createElement('p')
+                        portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                        
+                        var allergy = document.createElement('p')                                       
+                        allergy.textContent = ('This recipe is: ');
+                        
+                        for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
+                                var allergyList = data.hits[i].recipe.healthLabels[j]
+                                
+                                console.log(allergyList)
+
+                            var span = document.createElement('span')
+                                span.textContent = (allergyList + ' ');
+
+                                allergy.append(span)
+                            };
+
+                        var source = document.createElement('p')
+                        source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
+
+                        var recipeUrl = document.createElement('a')
+                        recipeUrl.setAttribute('href', data.hits[i].recipe.url)
+
+                        var urlText = document.createElement('p')
+                        urlText.textContent = 'Check out the recipe here!'              
+
+                        recipeUrl.appendChild(urlText)
+                        
+                        recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
+
+                }
         })
 };
 
-recipeWest()
+
 function recipeWest() {
     var apiUrl = 'https://api.edamam.com/api/recipes/v2?type=public&q=Western&app_id=3ee8fae0&app_key=88364411228c6da4b3e3a5deb40e8840&cuisineType=American&imageSize=REGULAR'
 
@@ -176,6 +273,53 @@ function recipeWest() {
         
         .then(function (data) {
             console.log(data);
+
+            recipeH.innerHTML = '';
+            recipeEl.innerHTML = '';
+        
+            var origin = document.createElement('h3')
+            origin.textContent = 'These recipes are typical of the Western United States'
+
+            recipeH.appendChild(origin)  
+            
+                for (var i = 0; i < data.hits.length; i++) {
+                    console.log(data.hits[i].recipe.label)             
+                    
+                    var recipeName = document.createElement('p')
+                    recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
+                    // use line below to add classes
+                    // recipeName.classList = 'add any classes that we want'
+                                
+                    var portionsCalories = document.createElement('p')
+                    portionsCalories.textContent = ('Serves: ' + data.hits[i].recipe.yield + ' Total Calories: ' + data.hits[i].recipe.calories);
+                    
+                    var allergy = document.createElement('p')                                       
+                    allergy.textContent = ('This recipe is: ');
+                    
+                    for (var j = 0; j < data.hits[i].recipe.healthLabels.length; j++) {
+                            var allergyList = data.hits[i].recipe.healthLabels[j]
+                            
+                            console.log(allergyList)
+
+                        var span = document.createElement('span')
+                            span.textContent = (allergyList + ' ');
+
+                            allergy.append(span)
+                        };
+
+                    var source = document.createElement('p')
+                    source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
+
+                    var recipeUrl = document.createElement('a')
+                    recipeUrl.setAttribute('href', data.hits[i].recipe.url)
+
+                    var urlText = document.createElement('p')
+                    urlText.textContent = 'Check out the recipe here!'              
+
+                    recipeUrl.appendChild(urlText)
+                    
+                    recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
+
+                }
         })
 };
-
