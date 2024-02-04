@@ -110,13 +110,17 @@ function initRecipeInfo() {
             var origin = document.createElement('h3')
             origin.textContent = 'These recipes are typical of the ' + regionTitle + ' United States'
 
-            recipeH.appendChild(origin)  
+            recipeH.appendChild(origin)
+
             // loop fetch data
-                for (var i = 0; i < data.hits.length; i++) {
+                for (let i = 0; i < data.hits.length; i++) {
                     console.log(data.hits[i].recipe.label)             
                     // create and append elements
-                    var recipeName = document.createElement('p')
-                    recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
+
+                    var Name = document.createElement('p')
+                    // send to local storage on click event
+                    var recipeName = data.hits[i].recipe.label
+                    Name.textContent = ('Recipe Name: ' + recipeName)
                     // use line below to add classes
                     // recipeName.classList = 'add any classes that we want'
                                 
@@ -140,8 +144,10 @@ function initRecipeInfo() {
                     var source = document.createElement('p')
                     source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
 
-                    var recipeUrl = document.createElement('a')
-                    recipeUrl.setAttribute('href', data.hits[i].recipe.url)
+                    var url = document.createElement('a')
+                    // get recipe url for local storage
+                    var recipeUrl = data.hits[i].recipe.url;
+                    url.setAttribute('href', recipeUrl);
 
                     var urlText = document.createElement('p')
                     urlText.textContent = 'Check out the recipe here!'
@@ -149,18 +155,25 @@ function initRecipeInfo() {
                     var btn = document.createElement('button')
                     btn.textContent = 'Favorite this recipe!'
                     btn.classList = 'fav-btn'
-                    // add event lisiner for button
+                    
+                    // get recipe name and url from current loop iteration
+                    function getCurrentIndex (recipeName, recipeUrl) {
+                    
+                        // add event lisiner for button
                         btn.addEventListener('click', function (event){
-                            console.log(event)
-                            saveName = recipeName.textContent;
+                            saveName = recipeName;
                             saveUrl = recipeUrl;
+
                             console.log(saveName)
                             console.log(saveUrl)
+                            
+                                renderFav();
                         })
+                    } getCurrentIndex(recipeName, recipeUrl)                  
 
-                    recipeUrl.append(urlText)
+                    url.append(urlText)
                     
-                    recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl, btn)            
+                    recipeEl.append(Name, portionsCalories, allergy, source, url, btn)            
 
                 }
 
@@ -174,9 +187,10 @@ function renderFav() {
         url: saveUrl
     };
 
-    var favInfo = Json.parse(localStorage.getItem('fav-info'))
+    var favInfo = JSON.parse(localStorage.getItem('fav-info'))
     if (favInfo === null) {
         favInfo = [];
+        favInfo.push(saveInfo)
     } else if (saveInfo === '' || favInfo.includes(saveInfo)) { 
         console.log()
     }
@@ -187,7 +201,7 @@ function renderFav() {
     localStorage.setItem('fav-info', JSON.stringify(favInfo));
 }
 
-function displayFav() {
+function displayFavs() {
 
     var favInfo = JSON.parse(localStorage.getItem('fav-info'))
 
