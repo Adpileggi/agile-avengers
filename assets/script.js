@@ -2,8 +2,7 @@
 var recipeH = document.getElementById('recipe-title')
 var recipeEl = document.getElementById('recipe-el')
 var recipeNameEl = document.getElementById('recipename')
-
-var favBtn = document.querySelectorAll('.fav-btn')
+var favEl = document.getElementById('fav-el')
 
 var apiQ;
 var apiUrl;
@@ -168,6 +167,7 @@ function initRecipeInfo() {
                             console.log(saveUrl)
                             
                                 renderFav();
+                                displayFavs();
                         })
                     } getCurrentIndex(recipeName, recipeUrl)                  
 
@@ -204,12 +204,35 @@ function renderFav() {
 function displayFavs() {
 
     var favInfo = JSON.parse(localStorage.getItem('fav-info'))
+    console.log(favInfo)
+    favEl.innerHTML = '';
+
+    if (favInfo === null) {
+        return;
+    }
+
+
+    var h3 = document.createElement('h3')
+    h3.textContent = "Favorites: "
+
+    favEl.append(h3)
 
     for (var i = 0; i < favInfo.length; i++) {
         var displayInfo = [];
             displayInfo = favInfo[i];
 
             console.log(displayInfo)
-        
+
+            var a = document.createElement('a')
+            a.setAttribute('href', favInfo[i].url)
+
+            var p = document.createElement('p');
+            p.textContent = favInfo[i].name
+
+            a.append(p)
+
+            h3.append(a)
     }
 }
+
+displayFavs()
