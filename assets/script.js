@@ -3,9 +3,14 @@ var recipeH = document.getElementById('recipe-title')
 var recipeEl = document.getElementById('recipe-el')
 var recipeNameEl = document.getElementById('recipename')
 
+var favBtn = document.querySelectorAll('.fav-btn')
+
 var apiQ;
 var apiUrl;
 var regionTitle;
+
+var saveName;
+var saveUrl;
 
 // connect map api
 // display map in the map-el div
@@ -139,14 +144,58 @@ function initRecipeInfo() {
                     recipeUrl.setAttribute('href', data.hits[i].recipe.url)
 
                     var urlText = document.createElement('p')
-                    urlText.textContent = 'Check out the recipe here!'              
-
-                    recipeUrl.appendChild(urlText)
+                    urlText.textContent = 'Check out the recipe here!'
                     
-                    recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
+                    var btn = document.createElement('button')
+                    btn.textContent = 'Favorite this recipe!'
+                    btn.classList = 'fav-btn'
+                    // add event lisiner for button
+                        btn.addEventListener('click', function (event){
+                            console.log(event)
+                            saveName = recipeName.textContent;
+                            saveUrl = recipeUrl;
+                            console.log(saveName)
+                            console.log(saveUrl)
+                        })
+
+                    recipeUrl.append(urlText)
+                    
+                    recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl, btn)            
 
                 }
 
 
         })
 };
+
+function renderFav() {
+    var saveInfo = {
+        name: saveName,
+        url: saveUrl
+    };
+
+    var favInfo = Json.parse(localStorage.getItem('fav-info'))
+    if (favInfo === null) {
+        favInfo = [];
+    } else if (saveInfo === '' || favInfo.includes(saveInfo)) { 
+        console.log()
+    }
+    else {
+        favInfo.push(saveInfo);
+    }
+
+    localStorage.setItem('fav-info', JSON.stringify(favInfo));
+}
+
+function displayFav() {
+
+    var favInfo = JSON.parse(localStorage.getItem('fav-info'))
+
+    for (var i = 0; i < favInfo.length; i++) {
+        var displayInfo = [];
+            displayInfo = favInfo[i];
+
+            console.log(displayInfo)
+        
+    }
+}
