@@ -191,16 +191,22 @@ function renderFav() {
     if (favInfo === null) {
         favInfo = [];
         favInfo.push(saveInfo)
-    } else if (saveInfo === '' || favInfo.includes(saveInfo)) { 
-        console.log()
-    }
-    else {
-        favInfo.push(saveInfo);
+    } else { checkSave() } 
+    
+    function checkSave() { 
+        for (var i = 0; favInfo.length; i++) {
+            if (favInfo[i].url = saveInfo.url) {
+                console.log('doubles')
+                return
+            } else {
+                favInfo.push(saveInfo)
+            }
+        }
     }
 
     localStorage.setItem('fav-info', JSON.stringify(favInfo));
 }
-
+// saveInfo === '' || favInfo.includes(saveInfo)
 function displayFavs() {
 
     var favInfo = JSON.parse(localStorage.getItem('fav-info'))
