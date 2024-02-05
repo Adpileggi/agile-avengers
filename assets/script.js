@@ -2,10 +2,14 @@
 var recipeH = document.getElementById('recipe-title')
 var recipeEl = document.getElementById('recipe-el')
 var recipeNameEl = document.getElementById('recipename')
+var favEl = document.getElementById('fav-el')
 
 var apiQ;
 var apiUrl;
 var regionTitle;
+
+var saveName;
+var saveUrl;
 
 // connect map api
 // display map in the map-el div
@@ -105,13 +109,17 @@ function initRecipeInfo() {
             var origin = document.createElement('h3')
             origin.textContent = 'These recipes are typical of the ' + regionTitle + ' United States'
 
-            recipeH.appendChild(origin)  
+            recipeH.appendChild(origin)
+
             // loop fetch data
-                for (var i = 0; i < data.hits.length; i++) {
+                for (let i = 0; i < data.hits.length; i++) {
                     console.log(data.hits[i].recipe.label)             
                     // create and append elements
-                    var recipeName = document.createElement('p')
-                    recipeName.textContent = ('Recipe Name: ' + data.hits[i].recipe.label)
+
+                    var Name = document.createElement('p')
+                    // send to local storage on click event
+                    var recipeName = data.hits[i].recipe.label
+                    Name.textContent = ('Recipe Name: ' + recipeName)
                     // use line below to add classes
                     // recipeName.classList = 'add any classes that we want'
                                 
@@ -135,18 +143,102 @@ function initRecipeInfo() {
                     var source = document.createElement('p')
                     source.textContent = ('Recipe by: ' + data.hits[i].recipe.source)
 
-                    var recipeUrl = document.createElement('a')
-                    recipeUrl.setAttribute('href', data.hits[i].recipe.url)
+                    var url = document.createElement('a')
+                    // get recipe url for local storage
+                    var recipeUrl = data.hits[i].recipe.url;
+                    url.setAttribute('href', recipeUrl);
 
                     var urlText = document.createElement('p')
-                    urlText.textContent = 'Check out the recipe here!'              
-
-                    recipeUrl.appendChild(urlText)
+                    urlText.textContent = 'Check out the recipe here!'
                     
-                    recipeEl.append(recipeName, portionsCalories, allergy, source, recipeUrl)            
+                    var btn = document.createElement('button')
+                    btn.textContent = 'Favorite this recipe!'
+                    btn.classList = 'fav-btn'
+                    
+                    // get recipe name and url from current loop iteration
+                    function getCurrentIndex (recipeName, recipeUrl) {
+                    
+                        // add event lisiner for button
+                        btn.addEventListener('click', function (event){
+                            saveName = recipeName;
+                            saveUrl = recipeUrl;
+
+                            console.log(saveName)
+                            console.log(saveUrl)
+                            
+                                renderFav();
+                                displayFavs();
+                        })
+                    } getCurrentIndex(recipeName, recipeUrl)                  
+
+                    url.append(urlText)
+                    
+                    recipeEl.append(Name, portionsCalories, allergy, source, url, btn)            
 
                 }
 
 
         })
 };
+
+function renderFav() {
+    var saveInfo = {
+        name: saveName,
+        url: saveUrl
+    };
+
+    var favInfo = JSON.parse(localStorage.getItem('fav-info'))
+    if (favInfo === null) {
+        favInfo = [];
+        favInfo.push(saveInfo)
+    } else { checkSave() } 
+    
+    function checkSave() { 
+        for (var i = 0; favInfo.length; i++) {
+            if (favInfo[i].url = saveInfo.url) {
+                console.log('doubles')
+                return
+            } else {
+                favInfo.push(saveInfo)
+            }
+        }
+    }
+
+    localStorage.setItem('fav-info', JSON.stringify(favInfo));
+}
+// saveInfo === '' || favInfo.includes(saveInfo)
+function displayFavs() {
+
+    var favInfo = JSON.parse(localStorage.getItem('fav-info'))
+    console.log(favInfo)
+    favEl.innerHTML = '';
+
+    if (favInfo === null) {
+        return;
+    }
+
+
+    var h3 = document.createElement('h3')
+    h3.textContent = "Favorites: "
+
+    favEl.append(h3)
+
+    for (var i = 0; i < favInfo.length; i++) {
+        var displayInfo = [];
+            displayInfo = favInfo[i];
+
+            console.log(displayInfo)
+
+            var a = document.createElement('a')
+            a.setAttribute('href', favInfo[i].url)
+
+            var p = document.createElement('p');
+            p.textContent = favInfo[i].name
+
+            a.append(p)
+
+            h3.append(a)
+    }
+}
+
+displayFavs()
