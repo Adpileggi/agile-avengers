@@ -126,7 +126,7 @@ function initRecipeInfo() {
             var origin = document.createElement('h3')
             origin.textContent = 'These recipes are typical of the ' + regionTitle + ' United States'
 
-            // recipeH.appendChild(origin)
+            recipeH.appendChild(origin)
 
             // loop fetch data
             for (let i = 0; i < data.hits.length; i++) {
