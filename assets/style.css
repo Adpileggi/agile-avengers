@@ -1,27 +1,38 @@
-body {
-    background-image: url(https://i0.wp.com/picjumbo.com/wp-content/uploads/glitter-abstract-red-and-blue-usa-flag-colors-background-free-photo.jpg?w=2210&quality=70);
-    background-attachment: fixed;
-    background-size: cover;
-    color: #FFFFFF
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
-header {
+
+html {
+    background-image: linear-gradient(rgb(57, 119, 220), rgb(160, 196, 253), rgb(57, 119, 220));
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;
+    height: 100vh;
+}
+
+/* header {
     text-align: center;
     text-wrap: wrap;
-    background-color: rgb(2, 13, 131);
     margin: 10px;
     font-size: 2vw;
     color: rgb(255, 0, 0);
     text-shadow: 1px 1px 2px red, 0 0 1em rgb(255, 255, 255), 0 0 0.2em rgb(255, 255, 255);
-    font-family:  Engravers MT, Showcard Gothic, Agency FB, Arial Rounded MT Bold, Copperplate Gothic Bold;
+    font-family: Showcard Gothic, Agency FB, Arial Rounded MT Bold, Copperplate Gothic Bold;
+} */
+
+.material-icons {
+    font-size: 30px
 }
 
 h2 {
-    background-color: rgb(2, 13, 131);
     display: inline-flex;
 }
 
 .recipe-el {
-    background-color: rgb(2, 13, 131);
     display: inline-grid;
     text-align: center;
     flex-wrap: wrap;
