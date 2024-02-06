@@ -98,6 +98,22 @@ function initRecipeInfo() {
 
     fetch(apiUrl)
         .then(function (response) {
+            if (response.status >= 400) {
+
+                console.log(response)
+
+                var errorMsg = document.createElement('h3')
+                errorMsg.textContent = ('Sorry, Error: ' + response.status + '. Please try again.')
+
+                console.log(errorMsg)
+
+                recipeH.appendChild(errorMsg)
+
+                console.log(recipeH)
+
+                throw new Error()
+            }
+
             return response.json();
         })
         .then(function (data) {
@@ -110,7 +126,7 @@ function initRecipeInfo() {
             var origin = document.createElement('h3')
             origin.textContent = 'These recipes are typical of the ' + regionTitle + ' United States'
 
-            recipeH.appendChild(origin)
+            // recipeH.appendChild(origin)
 
             // loop fetch data
             for (let i = 0; i < data.hits.length; i++) {
