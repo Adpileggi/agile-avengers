@@ -3,8 +3,7 @@ var recipeH = document.getElementById('recipe-title')
 var recipeEl = document.getElementById('recipe-el')
 var recipeNameEl = document.getElementById('recipename')
 var favEl = document.getElementById('fav-el')
-var modal = document.querySelector('.modal-content')
-var modalFooter = document.querySelector('.modal-footer')
+
 
 var apiQ;
 var apiUrl;
@@ -96,7 +95,7 @@ initMap();
 // populate search results to the recipe div
 
 function initRecipeInfo() {
-    var apiUrl = 'https://api.edamam.com/api/recipes/v2?type=public&q=' + apiQ + '&app_id=e8fae0&app_key=88364411228c6da4b3e3a5deb40e8840&cuisineType=American&imageSize=REGULAR'
+    var apiUrl = 'https://api.edamam.com/api/recipes/v2?type=public&q=' + apiQ + '&app_id=3ee8fae0&app_key=88364411228c6da4b3e3a5deb40e8840&cuisineType=American&imageSize=REGULAR'
 
     fetch(apiUrl)
         .then(function (response) {
@@ -109,16 +108,7 @@ function initRecipeInfo() {
 
                 console.log(errorMsg)
 
-                modal.appendChild(errorMsg)
-
-                console.log(modal)
-
-                var closeModal = document.createElement('a')
-                closeModal.setAttribute('href', '#!')
-                closeModal.classList = 'modal-close waves-effect waves-green btn-flat'
-                closeModal.textContent = 'Close'
-
-                modalFooter.appendChild(closeModal)
+                recipeH.appendChild(errorMsg)
 
                 throw new Error()
             }
@@ -240,8 +230,8 @@ function displayFavs() {
     }
 
 
-    var h3 = document.createElement('h3')
-    h3.textContent = "Favorites: "
+    var a = document.createElement('a')
+    a.textContent = "Click to see favorite recipes!"
 
     favEl.append(h3)
 
