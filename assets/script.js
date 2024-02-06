@@ -103,6 +103,7 @@ function initRecipeInfo() {
         .then(function (data) {
             console.log(data);
             // clears inner HTML
+            recipeEl.classList.remove('hide');
             recipeH.innerHTML = '';
             recipeEl.innerHTML = '';
             // title of appended section
