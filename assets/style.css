@@ -20,17 +20,8 @@ header {
 }
 
 .material-icons {
-    font-size: 30px
+    font-size: 30px;
 }
-
-/* h2 {
-    display: inline-flex;
-    font-family: open sans, Elephant, lato, Agency FB;
-    font-size: x-large;
-    color: aqua;
-    text-shadow: 1px 1px 2px rgb(0, 0, 0), 0 0 1em rgb(255, 255, 255), 0 0 0.2em rgb(255, 255, 255);
-    float: right;
-} */
 
 #recipe-title, h2 {
     max-width: 100%;
