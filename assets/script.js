@@ -4,6 +4,7 @@ var recipeEl = document.getElementById('recipe-el')
 var recipeNameEl = document.getElementById('recipename')
 var favEl = document.getElementById('fav-el')
 
+
 var apiQ;
 var apiUrl;
 var regionTitle;
@@ -108,8 +109,6 @@ function initRecipeInfo() {
                 console.log(errorMsg)
 
                 recipeH.appendChild(errorMsg)
-
-                console.log(recipeH)
 
                 throw new Error()
             }
@@ -231,8 +230,8 @@ function displayFavs() {
     }
 
 
-    var h3 = document.createElement('h3')
-    h3.textContent = "Favorites: "
+    var a = document.createElement('a')
+    a.textContent = "Click to see favorite recipes!"
 
     favEl.append(h3)
 
