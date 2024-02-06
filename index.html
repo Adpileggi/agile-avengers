@@ -5,22 +5,34 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- change tilte later -->
-        <title>USA Regional Food Cuisine</title>
+        <title>Rendered Recipes</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="assets/style.css">
+        
     </head>
     <body>
         <header>
-            <h1>USA Regional Food Cuisine</h1>
+            <nav>
+                <div class="nav-wrapper left-align blue darken-4 z-depth-5">
+                  <a href="#!" class="brand-logo"><i class="material-icons">cake</i>Rendered Recipes!</a>
+                  <!-- <ul class="right hide-on-med-and-down">
+                    <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+                    <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+                    <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+                    <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+                  </ul> -->
+                </div>
+              </nav>
             <!-- maybe make a navbar or something? -->
             <!-- could also be a sidebar depending on the css we use  -->
         </header>
         <main>
-
             <div>
-             <h2>To get started: Click on an area of the United States map to explore popular recipes for that region!</h2>
+             <h2><i class="material-icons">restaurant</i> Click on any pin within the United States map to explore popular recipes the selected region!</h2>
             </div>
 
-            <div id = 'map'>
+            <div id = 'map' class="btn-floating btn-large light-blue lighten-3">
                 <!-- get map from api and place here -->
             </div>
             <div id ='modal1' class="modal">
@@ -35,7 +47,7 @@
                 <!-- region header populate here -->
             </div>
 
-            <div id = 'recipe-el'>
+            <div id = 'recipe-el' class="hide">
                 <!-- populate recipes here -->
             </div>
             
@@ -44,18 +56,6 @@
                 <!-- populate favorites here -->
             </div>
             
-                <div>
-                <h3>Below is the information of the top recipes of the selected region!</h3>
-                <p id="recipename">Recipe name Here</p>
-                <!-- <label for="recipename">Recipe Name:</label>
-                <input readonly="recipename"  placeholder="This is the recipe name!"> -->
-                <label for="regionOrigin">Region Origin:</label>
-                <input readonly="regionOrigin" id="regionOrigin" placeholder="The region it comes from!">
-                <label for="ingredients">Ingredients:</label>
-                <textarea readonly="ingredients" id="ingredients" placeholder="These are the ingredients to make the food!"></textarea>
-                <label for="nutrition">Nutritional Facts:</label>
-                <textarea readonly="nutrition" id="nutrition" placeholder="These are the nutritional facts, which include calories, serving size, and other nutritional values!"></textarea>
-            </div>
         </main>
     </body>
     <script>

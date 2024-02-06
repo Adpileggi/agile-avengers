@@ -128,13 +128,14 @@ function initRecipeInfo() {
         .then(function (data) {
             console.log(data);
             // clears inner HTML
+            recipeEl.classList.remove('hide');
             recipeH.innerHTML = '';
             recipeEl.innerHTML = '';
             // title of appended section
             var origin = document.createElement('h3')
             origin.textContent = 'These recipes are typical of the ' + regionTitle + ' United States'
 
-            // recipeH.appendChild(origin)
+            recipeH.appendChild(origin)
 
             // loop fetch data
             for (let i = 0; i < data.hits.length; i++) {
