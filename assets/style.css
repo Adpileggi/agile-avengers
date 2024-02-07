@@ -27,7 +27,7 @@ header {
     font-size: 30px;
 }
 
-#recipe-title {
+#recipe-title, h3 {
     max-width: 100%;
     color: white;
     text-align: center;
@@ -64,6 +64,7 @@ button {
 
 .hide {
     display: none;
+
 }
 #map {
     width: 100%;
