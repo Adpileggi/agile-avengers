@@ -19,11 +19,15 @@ header {
     font-family: Elephant, Agency FB, Arial Rounded MT Bold, Copperplate Gothic Bold;
 }
 
+.modal-trigger {
+    margin: 20px;
+}
+
 .material-icons {
     font-size: 30px;
 }
 
-#recipe-title, h2 {
+#recipe-title {
     max-width: 100%;
     color: white;
     text-align: center;
@@ -35,15 +39,26 @@ header {
     display: inline-grid;
     border: solid;
     border-radius: 5px;
-    border-color: #94D2A5;
-    background-color: #F5F0E4;
+    background-image: linear-gradient(to right,rgb(221, 206, 139), white, rgb(221, 206, 139));
+    border-color: rgb(221, 206, 139);
     text-align: center;
-    font-family: Elephant, lato, Agency FB;
+    font-family: Algerian, Engravers MT, Elephant, lato, Agency FB;
     font-size: x-large;
     flex-wrap: wrap;
     gap: 5px;
     margin: 20px;
     padding: 20px;
+    box-shadow: 0 0 10px 2px;
+}
+
+button {
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    margin-bottom: 75px;
+    font-family: Engravers MT, Elephant, lato, Agency FB;
+    font-size: medium;
     box-shadow: 0 0 10px 2px;
 }
 
