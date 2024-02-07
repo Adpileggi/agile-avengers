@@ -231,8 +231,8 @@ function displayFavs() {
     }
 
 
-    var a = document.createElement('a')
-    a.textContent = "Click to see favorite recipes!"
+    var h3 = document.createElement('h3')
+    h3.textContent = 'Favorites'
 
     favEl.append(h3)
 
